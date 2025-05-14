@@ -1,4 +1,4 @@
-package DTO;
+package com.bank.DTO;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;

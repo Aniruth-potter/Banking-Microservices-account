@@ -1,14 +1,14 @@
-package Controller;
+package com.bank.Controller;
 
-
-import DTO.AccountDTO;
-import Services.AccountService;
-import entity.Account;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import com.bank.DTO.AccountDTO;
+import com.bank.Services.AccountService;
+import com.bank.entity.Account;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,11 +19,16 @@ public class AccountController {
 
     @Autowired
     private AccountService accountService;
+    
+    @GetMapping("/ping")
+    public String ping() {
+        return "AccountController is alive";
+    }
 
     // Create a new account
-    @PostMapping
-    public ResponseEntity<Long> createAccount(@Validated @RequestBody AccountDTO accountDto) {
-        long createdAccountId = accountService.createAccount(accountDto);
+    @PostMapping("/create")
+    public ResponseEntity<String> createAccount(@Validated @RequestBody AccountDTO accountDto) {
+        String createdAccountId = accountService.createAccount(accountDto);
         return new ResponseEntity<>(createdAccountId, HttpStatus.CREATED);
     }
 

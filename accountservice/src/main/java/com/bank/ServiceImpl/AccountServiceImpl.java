@@ -1,16 +1,22 @@
-package ServiceImpl;
+package com.bank.ServiceImpl;
 
-import DTO.AccountDTO;
-import Services.AccountService;
-import entity.Account;
-import entity.User;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
-import repos.AccountRepo;
-import repos.UserRepo;
+import org.springframework.stereotype.Service;
+
+import com.bank.DTO.AccountDTO;
+import com.bank.Services.AccountService;
+import com.bank.entity.Account;
+import com.bank.entity.User;
+import com.bank.repos.AccountRepo;
+import com.bank.repos.UserRepo;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
+@Service
 public class AccountServiceImpl implements AccountService {
 
     @Autowired
@@ -20,7 +26,7 @@ public class AccountServiceImpl implements AccountService {
     AccountRepo accountRepo;
 
     @Override
-    public long createAccount(AccountDTO accountDTO) {
+    public String createAccount(AccountDTO accountDTO) {
 // Step 1: Create User entity from DTO
         User user = new User();
         user.setFirstName(accountDTO.getFirstName());
@@ -39,12 +45,15 @@ public class AccountServiceImpl implements AccountService {
         account.setAccountType(accountDTO.getAccountType());
         account.setBalance(accountDTO.getBalance());
         account.setUser(savedUser);  // Link to user
+        account.setAccountNumber(generateAccountNo());
 
         // Step 4: Save Account
         Account savedAccount = accountRepo.save(account);
+        
+       
 
 
-        return 1;
+        return savedAccount.getAccountNumber();
     }
 
     @Override
@@ -82,4 +91,11 @@ public class AccountServiceImpl implements AccountService {
     public void deleteAccount(Long id) {
         accountRepo.deleteById(id);
     }
+    
+    public String generateAccountNo() {
+    	Random random = new Random();
+        long randomPart = random.nextInt(900000); // Still int here, safe range
+        long AccNo = randomPart + 10000000000000L; // Note the L for long
+        return String.valueOf(AccNo);
+	}
 }

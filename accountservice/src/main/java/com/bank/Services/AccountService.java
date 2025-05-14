@@ -1,14 +1,15 @@
-package Services;
+package com.bank.Services;
 
-import DTO.AccountDTO;
-import entity.Account;
 
 import java.util.List;
 import java.util.Optional;
 
+import com.bank.DTO.AccountDTO;
+import com.bank.entity.Account;
+
 public interface AccountService {
 
-    public long createAccount(AccountDTO accountDTO);
+    public String createAccount(AccountDTO accountDTO);
     public List<Account> getAllAccounts();
     public Optional<Account> getAccountById(Long id);
     public Account updateAccount(Long id,Account account);

@@ -1,12 +1,16 @@
-package repos;
+package com.bank.repos;
 
-import entity.Account;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.bank.entity.Account;
 
 import java.util.Optional;
 
+@Repository
 public interface AccountRepo extends JpaRepository<Account,Long> {
 
-    Optional<Account> findByMobile(Long id);
+    
     public void deleteById(Long id);
 }

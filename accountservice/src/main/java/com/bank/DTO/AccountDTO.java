@@ -27,16 +27,40 @@ public class AccountDTO {
 
     @NotNull
     private String job;
+    
+    private String actionType;
 
-    @NotNull
+    
+
+	@NotNull
     @Email
     private String email;
 
     private String phone;
     private String address;
+    
+    private String accountNumber;
+    
+    private Long id;
 
 
-    public @NotNull String getAccountType() {
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public @NotNull String getAccountType() {
         return accountType;
     }
 
@@ -107,4 +131,12 @@ public class AccountDTO {
     public void setAddress(String address) {
         this.address = address;
     }
+    
+    public String getActionType() {
+		return actionType;
+	}
+
+	public void setActionType(String actionType) {
+		this.actionType = actionType;
+	}
 }

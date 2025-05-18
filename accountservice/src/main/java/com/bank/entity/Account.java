@@ -3,6 +3,8 @@ package com.bank.entity;
 import jakarta.persistence.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -26,6 +28,7 @@ public class Account {
     // Many accounts belong to one user
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     // Constructors
